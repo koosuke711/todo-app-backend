@@ -51,7 +51,7 @@ MIDDLEWARE = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # フロントエンド（Next.js）のURL
-    "https://todo-app-frontend-lemon-mu.vercel.app/",
+    "https://todo-app-frontend-lemon-mu.vercel.app",
 ]
 
 CORS_ALLOW_HEADERS = [
