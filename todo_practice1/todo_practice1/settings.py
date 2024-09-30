@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-n^7i*qqsn3lc#ki)d8268plb68(duk@x-k@rc-war%3p=)-@a0
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = Trueが設定されていますが、本番環境では必ずDEBUG = Falseに設定
-DEBUG = True
+DEBUG = False
 
 # 本番環境で運用する際には、以下のセキュリティ設定も考慮してください。
 
@@ -21,7 +21,12 @@ DEBUG = True
 # CSRF_COOKIE_SECURE: Trueに設定して、HTTPSを使用している場合にCSRFクッキーを安全に保護します。
 # SESSION_COOKIE_SECURE: Trueに設定して、HTTPSを使用している場合にセッションクッキーを安全に保護します。
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'todo-app-frontend-leman-mu.vercel.app',  # フロントエンドの URL を追加
+    'kosuke-todo-app-backend-4326c43ed17d.herokuapp.com',  # バックエンドの URL
+]
 
 
 # Application definition
@@ -52,13 +57,6 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",  # フロントエンド（Next.js）のURL
     "https://todo-app-frontend-lemon-mu.vercel.app",
-]
-
-ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'todo-app-frontend-leman-mu.vercel.app',  # フロントエンドの URL を追加
-    'kosuke-todo-app-backend-4326c43ed17d.herokuapp.com',  # バックエンドの URL
 ]
 
 CORS_ALLOW_HEADERS = [
