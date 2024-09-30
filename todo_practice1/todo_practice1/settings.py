@@ -24,8 +24,9 @@ DEBUG = False
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'todo-app-frontend-leman-mu.vercel.app',  # フロントエンドの URL を追加
-    'kosuke-todo-app-backend-4326c43ed17d.herokuapp.com',  # バックエンドの URL
+    'http://localhost:3000',
+    'https://todo-app-frontend-lemon-mu.vercel.app',  # フロントエンドの URL を追加
+    'https://kosuke-todo-app-backend-4326c43ed17d.herokuapp.com',  # バックエンドの URL
 ]
 
 
