@@ -1,1 +1,1 @@
-web: gunicorn django_website.wsgi
+web: gunicorn todo_practice1.wsgi
