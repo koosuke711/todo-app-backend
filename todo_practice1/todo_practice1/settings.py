@@ -54,6 +54,13 @@ CORS_ALLOWED_ORIGINS = [
     "https://todo-app-frontend-lemon-mu.vercel.app",
 ]
 
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'todo-app-frontend-leman-mu.vercel.app',  # フロントエンドの URL を追加
+    'kosuke-todo-app-backend-4326c43ed17d.herokuapp.com',  # バックエンドの URL
+]
+
 CORS_ALLOW_HEADERS = [
     'authorization',
     'content-type',
