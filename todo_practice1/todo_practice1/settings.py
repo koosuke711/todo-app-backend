@@ -22,13 +22,13 @@ DEBUG = False
 # SESSION_COOKIE_SECURE: Trueに設定して、HTTPSを使用している場合にセッションクッキーを安全に保護します。
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
     'http://localhost:3000',
     'https://todo-app-frontend-lemon-mu.vercel.app',  # フロントエンドの URL を追加
     'https://kosuke-todo-app-backend-4326c43ed17d.herokuapp.com',  # バックエンドの URL
 ]
 
+CSRF_COOKIE_SECURE: True
+SESSION_COOKIE_SECURE: True
 
 # Application definition
 
