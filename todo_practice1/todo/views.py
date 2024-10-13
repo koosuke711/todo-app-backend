@@ -210,13 +210,13 @@ class UserViewSet(viewsets.ModelViewSet):
 
         # UIDをデコードしてユーザーを取得
         try:
-            uid = urlsafe_base64_decode(uidb64[0]).decode()
+            uid = urlsafe_base64_decode(uidb64).decode()
             user = User.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             return Response({'detail': '無効なリンクです。'}, status=status.HTTP_400_BAD_REQUEST)
 
         # トークンを検証
-        if not default_token_generator.check_token(user, token[0]):
+        if not default_token_generator.check_token(user, token):
             return Response({'detail': '無効なリンクです。'}, status=status.HTTP_400_BAD_REQUEST)
 
         # パスワードをリセット
