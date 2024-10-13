@@ -10,7 +10,7 @@ from rest_framework.response import Response
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_encode
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
 
 class ProjectViewSet(viewsets.ModelViewSet):
@@ -157,14 +157,12 @@ class UserViewSet(viewsets.ModelViewSet):
 
         # 現在のパスワードが正しいか確認
         if not user.check_password(old_password):
-            print('現在のパスワードが正しくありません。')
             return Response({'old_password': ['現在のパスワードが正しくありません。']}, status=status.HTTP_400_BAD_REQUEST)
 
         # 新しいパスワードを検証
         try:
             validate_password(new_password, user=user)
         except Exception as e:
-            print(e)
             return Response({'new_password': list(e.messages)}, status=status.HTTP_400_BAD_REQUEST)
 
         # パスワードを変更
@@ -212,13 +210,13 @@ class UserViewSet(viewsets.ModelViewSet):
 
         # UIDをデコードしてユーザーを取得
         try:
-            uid = urlsafe_base64_encode(uidb64).decode()  # ここでエラーが出るかもしれない
+            uid = urlsafe_base64_decode(uidb64[0]).decode()
             user = User.objects.get(pk=uid)
         except (TypeError, ValueError, OverflowError, User.DoesNotExist):
             return Response({'detail': '無効なリンクです。'}, status=status.HTTP_400_BAD_REQUEST)
 
         # トークンを検証
-        if not default_token_generator.check_token(user, token):
+        if not default_token_generator.check_token(user, token[0]):
             return Response({'detail': '無効なリンクです。'}, status=status.HTTP_400_BAD_REQUEST)
 
         # パスワードをリセット
