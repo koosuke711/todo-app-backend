@@ -13,7 +13,8 @@ SECRET_KEY = 'django-insecure-n^7i*qqsn3lc#ki)d8268plb68(duk@x-k@rc-war%3p=)-@a0
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = Trueが設定されていますが、本番環境では必ずDEBUG = Falseに設定
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 # 本番環境で運用する際には、以下のセキュリティ設定も考慮してください。
 
@@ -23,12 +24,13 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
+    '127.0.0.1',
     'todo-app-frontend-lemon-mu.vercel.app',  # フロントエンドの URL を追加
     'kosuke-todo-app-backend-4326c43ed17d.herokuapp.com',  # バックエンドの URL
 ]
 
-CSRF_COOKIE_SECURE: True
-SESSION_COOKIE_SECURE: True
+# CSRF_COOKIE_SECURE: True
+# SESSION_COOKIE_SECURE: True
 
 # Application definition
 
@@ -166,3 +168,12 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# メール送信設定を追加 (Gmailの設定例)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'todo.app711@gmail.com'
+EMAIL_HOST_PASSWORD = 'xlyq dnvl rcbi cczx'
