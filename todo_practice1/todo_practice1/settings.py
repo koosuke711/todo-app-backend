@@ -9,11 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-n^7i*qqsn3lc#ki)d8268plb68(duk@x-k@rc-war%3p=)-@a0'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = Trueが設定されていますが、本番環境では必ずDEBUG = Falseに設定
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 # 本番環境で運用する際には、以下のセキュリティ設定も考慮してください。
 
@@ -23,12 +24,13 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'localhost',
-    'todo-app-frontend-lemon-mu.vercel.app',  # フロントエンドの URL を追加
-    'kosuke-todo-app-backend-4326c43ed17d.herokuapp.com',  # バックエンドの URL
+    '127.0.0.1',
+    os.environ["FRONTEND_URL"],  # フロントエンドの URL を追加
+    os.environ["BACKEND_URL"],  # バックエンドの URL
 ]
 
-CSRF_COOKIE_SECURE: True
-SESSION_COOKIE_SECURE: True
+# CSRF_COOKIE_SECURE: True
+# SESSION_COOKIE_SECURE: True
 
 # Application definition
 
@@ -56,8 +58,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # フロントエンド（Next.js）のURL
-    "https://todo-app-frontend-lemon-mu.vercel.app",
+    os.environ["LOCAL_HOST_FRONTEND"],  # フロントエンド（Next.js）のURL
+    os.environ["FRONTEND_URL"],
 ]
 
 CORS_ALLOW_HEADERS = [
@@ -166,3 +168,12 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# メール送信設定を追加 (Gmailの設定例)
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
