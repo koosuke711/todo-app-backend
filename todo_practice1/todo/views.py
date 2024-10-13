@@ -12,6 +12,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import send_mail
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes
+import os
 
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
@@ -187,7 +188,7 @@ class UserViewSet(viewsets.ModelViewSet):
         uid = urlsafe_base64_encode(force_bytes(user.pk))
 
         # リセットリンクの作成（フロントエンドのパスワードリセットページのURLを設定）
-        reset_url = f"http://localhost:3000/password-reset-confirm?uid={uid}&token={token}"
+        reset_url = f"{os.environ["FRONTEND_URL"]}/password-reset-confirm?uid={uid}&token={token}"
 
         # メール送信
         send_mail(
